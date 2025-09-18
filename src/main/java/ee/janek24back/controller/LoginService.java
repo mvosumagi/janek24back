@@ -8,7 +8,8 @@ import java.time.LocalTime;
 @Service
 public class LoginService {
 
-    public void login(String username, String password) {
-        LocalDate localdate = new LocalDate();
+    public LoginResponse login(String username, String password) {
+        User user = getValidUser(username, password);
+        return userMapper.toLoginResponse(user);
     }
 }
