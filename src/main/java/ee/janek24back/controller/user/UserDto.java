@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Value
 public class UserDto implements Serializable {
     Integer id;

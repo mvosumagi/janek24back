@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
-    UserMapper userMapper;
+
 
 
     public String getUserData() {
