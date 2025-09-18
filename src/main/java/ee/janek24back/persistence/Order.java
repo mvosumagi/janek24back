@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @Table(name = "\"order\"", schema = "janek24")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('janek24.order_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;

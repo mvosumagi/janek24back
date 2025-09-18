@@ -13,6 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "city", schema = "janek24")
 public class City {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('janek24.city_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;

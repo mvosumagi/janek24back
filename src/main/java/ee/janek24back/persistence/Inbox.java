@@ -16,6 +16,7 @@ import java.time.Instant;
 @Table(name = "inbox", schema = "janek24")
 public class Inbox {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('janek24.inbox_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
