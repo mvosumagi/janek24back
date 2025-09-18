@@ -14,6 +14,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "address", schema = "janek24")
 public class Address {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('janek24.address_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;

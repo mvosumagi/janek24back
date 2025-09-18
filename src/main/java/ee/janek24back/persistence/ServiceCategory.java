@@ -1,9 +1,6 @@
 package ee.janek24back.persistence;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -16,6 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "service_category", schema = "janek24")
 public class ServiceCategory {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('janek24.service_category_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;

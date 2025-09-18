@@ -17,6 +17,7 @@ import java.time.LocalDate;
 @Table(name = "service", schema = "janek24")
 public class Service {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('janek24.service_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;

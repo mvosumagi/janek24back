@@ -1,4 +1,4 @@
-package ee.janek24back.controller;
+package ee.janek24back.controller.user;
 
 import ee.janek24back.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,13 +15,11 @@ public class UserController {
 
     @GetMapping("/user")
     @Operation(
-            summary = "Returns a simple value",
-            description = "Demo endpoint that calls UserService and returns a string."
+            summary = "Tagastab user info UserId alusel",
+            description = "Tagastab user info UserId alusel"
     )
-
-    public String getUserValue() {
-        // call the service and return the result to the client
-        return userService.userService(); // -> "2000"
+    public String getUserData() {
+        return userService.getUserData();
     }
 
 }
