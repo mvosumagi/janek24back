@@ -1,4 +1,4 @@
-package infrastructure;
+package ee.janek24back.infrastructure;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;

@@ -1,4 +1,4 @@
-package infrastructure.exception;
+package ee.janek24back.infrastructure.exception;
 
 import lombok.Getter;
 

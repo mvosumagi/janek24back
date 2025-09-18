@@ -1,4 +1,4 @@
-package infrastructure.error;
+package ee.janek24back.infrastructure.error;
 
 import lombok.Data;
 
