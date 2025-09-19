@@ -1,4 +1,4 @@
-package ee.janek24back.persistence;
+package ee.janek24back.persistence.address;
 
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
@@ -27,12 +27,12 @@ public class Address {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "country_id", nullable = false)
-    private ee.janek24back.persistence.Country country;
+    private Country country;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "city_id", nullable = false)
-    private ee.janek24back.persistence.City city;
+    private City city;
 
     @Size(max = 255)
     @Column(name = "county")

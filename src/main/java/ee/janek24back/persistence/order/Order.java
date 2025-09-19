@@ -1,12 +1,12 @@
-package ee.janek24back.persistence;
+package ee.janek24back.persistence.order;
 
+import ee.janek24back.persistence.service.Service;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
 
@@ -17,7 +17,6 @@ import java.time.LocalDate;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('janek24.order_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -29,7 +28,7 @@ public class Order {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "service_id", nullable = false)
-    private ee.janek24back.persistence.Service service;
+    private Service service;
 
     @NotNull
     @Column(name = "date", nullable = false)

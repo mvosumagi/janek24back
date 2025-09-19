@@ -1,11 +1,10 @@
-package ee.janek24back.controller.user;
+package ee.janek24back.controller.user.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import java.io.Serializable;
 
@@ -14,19 +13,24 @@ import java.io.Serializable;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 
-@Value
 public class UserDto implements Serializable {
-    Integer id;
-    Integer roleId;
-    String roleName;
+
+    @NotNull
+    private Integer id;
+    @NotNull
+    private Integer roleId;
+    @NotNull
+    private String roleName;
     @NotNull
     @Size(max = 60)
-    String username;
+    private String username;
     @NotNull
     @Size(max = 60)
-    String password;
+    private String password;
     @NotNull
     @Size(max = 1)
-    String status;
+    private String status;
+
 }

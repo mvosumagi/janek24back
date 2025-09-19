@@ -12,26 +12,26 @@ INSERT INTO company (id, name, number) VALUES (default, 'HomeCare OÜ', '1234567
 INSERT INTO company (id, name, number) VALUES (default, 'Lauri Auto OÜ', '87654321');
 INSERT INTO company (id, name, number) VALUES (default, 'Mart Services OÜ', '11223344');
 
-INSERT INTO "user" (id, role_id, username, password, status) VALUES (default, (SELECT id FROM role WHERE name='ADMIN'), 'admin', '123', 'A');
-INSERT INTO "user" (id, role_id, username, password, status) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'rauno', '123', 'A');
-INSERT INTO "user" (id, role_id, username, password, status) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'lauri', '123', 'A');
-INSERT INTO "user" (id, role_id, username, password, status) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'mart', '123', 'A');
+INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='ADMIN'), 'admin', '123', 'A', '', '', '','');
+INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'rauno', '123', 'A', '', '', '','');
+INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'lauri', '123', 'A', '', '', '','');
+INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'mart', '123', 'A', '', '', '','');
 
 INSERT INTO user_company (id, company_id, user_id) VALUES (default, (SELECT id FROM company WHERE name='HomeCare OÜ'), (SELECT id FROM "user" WHERE username='admin'));
 INSERT INTO user_company (id, company_id, user_id) VALUES (default, (SELECT id FROM company WHERE name='Lauri Auto OÜ'), (SELECT id FROM "user" WHERE username='lauri'));
 INSERT INTO user_company (id, company_id, user_id) VALUES (default, (SELECT id FROM company WHERE name='Mart Services OÜ'), (SELECT id FROM "user" WHERE username='mart'));
 
-INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, phone_no, type, email)
-VALUES (default, (SELECT id FROM "user" WHERE username='admin'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tallinn'), 'Harju County', 'Kalasadama 4-12', '10145', '51234567', 'H', 'admin@homecare.ee');
+INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, type)
+VALUES (default, (SELECT id FROM "user" WHERE username='admin'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tallinn'), 'Harju County', 'Kalasadama 4-12', '10145', 'H');
 
-INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, phone_no, type, email)
-VALUES (default, (SELECT id FROM "user" WHERE username='rauno'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tartu'), 'Tartu County', 'Rüütli 7-5', '51007', '52345678', 'H', 'rauno@example.ee');
+INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, type)
+VALUES (default, (SELECT id FROM "user" WHERE username='rauno'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tartu'), 'Tartu County', 'Rüütli 7-5', '51007', 'H');
 
-INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, phone_no, type, email)
-VALUES (default, (SELECT id FROM "user" WHERE username='lauri'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tallinn'), 'Harju County', 'Telliskivi 60', '10412', '53456789', 'H', 'lauri@example.ee');
+INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, type)
+VALUES (default, (SELECT id FROM "user" WHERE username='lauri'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tallinn'), 'Harju County', 'Telliskivi 60', '10412', 'H');
 
-INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, phone_no, type, email)
-VALUES (default, (SELECT id FROM "user" WHERE username='mart'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tallinn'), 'Harju County', 'Pärnu mnt 67', '10134', '54555666', 'H', 'mart@martservices.ee');
+INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, type)
+VALUES (default, (SELECT id FROM "user" WHERE username='mart'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tallinn'), 'Harju County', 'Pärnu mnt 67', '10134', 'H');
 
 INSERT INTO service_category (id, name, description)
 VALUES (default, 'Home Cleaning', 'Professional house cleaning services to keep your home spotless and organized.');

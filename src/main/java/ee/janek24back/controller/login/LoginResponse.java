@@ -1,4 +1,4 @@
-package ee.janek24back.controller;
+package ee.janek24back.controller.login;
 
 import lombok.Data;
 

@@ -1,12 +1,13 @@
 package ee.janek24back.persistence;
 
+import ee.janek24back.persistence.order.Order;
+import ee.janek24back.persistence.service.Service;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 
@@ -17,7 +18,6 @@ import java.time.Instant;
 public class Inbox {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('janek24.inbox_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -52,10 +52,10 @@ public class Inbox {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id")
-    private ee.janek24back.persistence.Service service;
+    private Service service;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    private ee.janek24back.persistence.Order order;
+    private Order order;
 
 }

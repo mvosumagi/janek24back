@@ -1,11 +1,10 @@
-package ee.janek24back.persistence;
+package ee.janek24back.persistence.company;
 
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -14,7 +13,6 @@ import org.hibernate.annotations.ColumnDefault;
 public class UserCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('janek24.user_company_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 

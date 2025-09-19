@@ -1,12 +1,12 @@
-package ee.janek24back.persistence;
+package ee.janek24back.persistence.service;
 
+import ee.janek24back.persistence.Currency;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -18,7 +18,6 @@ import java.time.LocalDate;
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('janek24.service_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -30,7 +29,7 @@ public class Service {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "service_category_id", nullable = false)
-    private ee.janek24back.persistence.ServiceCategory serviceCategory;
+    private ServiceCategory serviceCategory;
 
     @Size(max = 254)
     @NotNull

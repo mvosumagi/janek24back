@@ -19,7 +19,11 @@ CREATE TABLE "user" (
                         role_id int NOT NULL REFERENCES role(id),
                         username varchar(60) NOT NULL,
                         password varchar(60) NOT NULL,
-                        status varchar(1) NOT NULL
+                        status varchar(1) NOT NULL,
+                        first_name varchar(255) NOT NULL,
+                        last_name varchar(255) NOT NULL,
+                        phone_no varchar(10) NOT NULL,
+                        email varchar(255) NOT NULL
 );
 
 CREATE TABLE company (
@@ -90,7 +94,5 @@ CREATE TABLE address (
                          county varchar(255) NULL,
                          details varchar(255) NOT NULL,
                          postal_code varchar(20) NOT NULL,
-                         phone_no varchar(10) NOT NULL,
-                         type varchar(1) NOT NULL,
-                         email varchar(255) NOT NULL
+                         type varchar(1) NOT NULL
 );

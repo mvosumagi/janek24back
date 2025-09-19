@@ -1,24 +1,19 @@
 package ee.janek24back.persistence.user;
 
-import ee.janek24back.persistence.Role;
+import ee.janek24back.persistence.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@RequiredArgsConstructor
-@AllArgsConstructor
-
 @Table(name = "\"user\"", schema = "janek24")
-
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('janek24.user_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -41,5 +36,15 @@ public class User {
     @NotNull
     @Column(name = "status", nullable = false, length = 1)
     private String status;
+
+    @Size(max = 10)
+    @NotNull
+    @Column(name = "phone_no", nullable = false, length = 10)
+    private String phoneNo;
+
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
 
 }

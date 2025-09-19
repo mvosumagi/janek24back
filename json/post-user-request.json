@@ -1,0 +1,14 @@
+{
+  "username": "value",
+  "firstName": "value",
+  "lastName": "value",
+  "phone": "value",
+  "email": "value",
+  "isCompany": true,
+  "companyName": "value",
+  "companyNumber": "value",
+  "countryId": 1,
+  "cityId": 1,
+  "description": "value",
+  "password": "value"
+}

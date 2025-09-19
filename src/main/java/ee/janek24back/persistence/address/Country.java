@@ -1,20 +1,18 @@
-package ee.janek24back.persistence;
+package ee.janek24back.persistence.address;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "role", schema = "janek24")
-public class Role {
+@Table(name = "country", schema = "janek24")
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('janek24.role_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 

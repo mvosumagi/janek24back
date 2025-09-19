@@ -1,7 +1,8 @@
-package ee.janek24back.controller;
+package ee.janek24back.service;
 
 import ee.janek24back.Status;
-import ee.janek24back.controller.user.UserMapper;
+import ee.janek24back.controller.login.LoginResponse;
+import ee.janek24back.persistence.user.UserMapper;
 import ee.janek24back.infrastructure.exception.ForbiddenException;
 import ee.janek24back.persistence.user.User;
 import ee.janek24back.persistence.user.UserRepository;

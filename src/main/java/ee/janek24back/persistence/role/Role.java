@@ -1,20 +1,18 @@
-package ee.janek24back.persistence;
+package ee.janek24back.persistence.role;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "service_category", schema = "janek24")
-public class ServiceCategory {
+@Table(name = "role", schema = "janek24")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('janek24.service_category_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -22,10 +20,5 @@ public class ServiceCategory {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Size(max = 255)
-    @NotNull
-    @Column(name = "description", nullable = false)
-    private String description;
 
 }
