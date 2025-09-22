@@ -1,4 +1,4 @@
-package ee.janek24back.persistence;
+package ee.janek24back.persistence.currency;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

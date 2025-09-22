@@ -1,4 +1,4 @@
-package ee.janek24back.persistence;
+package ee.janek24back.persistence.inbox;
 
 import ee.janek24back.persistence.order.Order;
 import ee.janek24back.persistence.service.Service;

@@ -1,6 +1,6 @@
 package ee.janek24back.persistence.service;
 
-import ee.janek24back.persistence.Currency;
+import ee.janek24back.persistence.currency.Currency;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
