@@ -15,7 +15,7 @@ import org.hibernate.annotations.ColumnDefault;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('janek24.address_id_seq')")
+    @ColumnDefault("next('janek24.address_id_seq')")
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -43,24 +43,10 @@ public class Address {
     @Column(name = "details", nullable = false)
     private String details;
 
-    @Size(max = 20)
-    @NotNull
-    @Column(name = "postal_code", nullable = false, length = 20)
-    private String postalCode;
-
-    @Size(max = 10)
-    @NotNull
-    @Column(name = "phone_no", nullable = false, length = 10)
-    private String phoneNo;
-
     @Size(max = 1)
     @NotNull
     @Column(name = "type", nullable = false, length = 1)
     private String type;
 
-    @Size(max = 255)
-    @NotNull
-    @Column(name = "email", nullable = false)
-    private String email;
 
 }

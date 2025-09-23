@@ -4,12 +4,18 @@ import ee.janek24back.persistence.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
+
 @Table(name = "\"user\"", schema = "janek24")
 public class User {
     @Id
@@ -37,14 +43,21 @@ public class User {
     @Column(name = "status", nullable = false, length = 1)
     private String status;
 
+    @Size(max = 255)
+    @NotNull
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @Size(max = 10)
     @NotNull
     @Column(name = "phone_no", nullable = false, length = 10)
     private String phoneNo;
 
-    @Size(max = 255)
-    @NotNull
-    @Column(name = "email", nullable = false)
-    private String email;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
 
 }
