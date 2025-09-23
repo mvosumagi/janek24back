@@ -1,0 +1,38 @@
+[
+  {
+    "serviceId": 22,
+    "service": "ChildCare",
+    "type": "EasyLife",
+    "validFrom": "01.01.25",
+    "validTo": "31.12.25",
+    "reactTime": "150",
+    "unitCost": "$45",
+    "status": "A",
+    "review": "****"
+
+  },
+  {
+    "serviceId": 23,
+    "service": "Lawn Care",
+    "type": "EasyLife",
+    "validFrom": "01.01.25",
+    "validTo": "31.12.25",
+    "reactTime": "100",
+    "unitCost": "$60",
+    "status": "A",
+    "review": "***"
+
+  },
+  {
+    "serviceId": 32,
+    "service": "Snow Removal",
+    "type": "Cannon",
+    "validFrom": "01.01.25",
+    "validTo": "31.12.25",
+    "reactTime": "80",
+    "unitCost": "$45",
+    "status": "A",
+    "review": "**"
+
+  }
+]
