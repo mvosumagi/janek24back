@@ -1,14 +1,11 @@
 package ee.janek24back.persistence.country;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CountryRepository extends JpaRepository<Country, Integer> {
-    @Query("select c from Country c where upper(c.name) = upper(:name)")
-    Country getCountryId();
-
-
+    Optional<Country> findByNameIgnoreCase(String name);
+    List<Country> findAllByNameContainingIgnoreCaseOrderByNameAsc(String name);
 }

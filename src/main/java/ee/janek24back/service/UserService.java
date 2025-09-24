@@ -8,6 +8,7 @@ import ee.janek24back.persistence.address.Address;
 import ee.janek24back.persistence.address.AddressMapper;
 import ee.janek24back.persistence.address.AddressRepository;
 import ee.janek24back.persistence.city.City;
+import ee.janek24back.persistence.city.CityRepository;
 import ee.janek24back.persistence.company.Company;
 import ee.janek24back.persistence.company.CompanyMapper;
 import ee.janek24back.persistence.company.CompanyRepository;
