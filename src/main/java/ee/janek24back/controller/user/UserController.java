@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
-@Validated
-
 public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("/user")
     @Operation(
             summary = "Tagastab user info UserId alusel",
             description = "Tagastab user info UserId alusel")
@@ -31,15 +28,15 @@ public class UserController {
         return userService.findUser(userId);
     }
 
-    @PostMapping("/")
+    @PostMapping("/user")
     @Operation(
             summary = "Lisab useri sisestatud andmete alusel",
             description = "Lisab useri sisestatud andmete alusel")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "Mingi viga", content = @Content(schema = @Schema(implementation = ApiError.class)))})
-    public void createAndSaveUser(@RequestBody @Valid UserDetailDto userDetailDto) {
-       userService.createAndSaveUser(userDetailDto);
+    public void addUser(@RequestBody @Valid UserDetailDto userDetailDto) {
+       userService.addUser(userDetailDto);
     }
 }
 

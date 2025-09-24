@@ -1,5 +1,7 @@
 package ee.janek24back.persistence.address;
 
+import ee.janek24back.persistence.city.City;
+import ee.janek24back.persistence.country.Country;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

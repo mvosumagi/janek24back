@@ -1,4 +1,4 @@
-package ee.janek24back.persistence.address;
+package ee.janek24back.persistence.country;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -9,17 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "city", schema = "janek24")
-public class City {
+@Table(name = "country", schema = "janek24")
+
+
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "country_id", nullable = false)
-    private Country country;
 
     @Size(max = 255)
     @NotNull

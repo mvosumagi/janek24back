@@ -1,5 +1,6 @@
-package ee.janek24back.persistence.company;
+package ee.janek24back.persistence.usercompany;
 
+import ee.janek24back.persistence.company.Company;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
