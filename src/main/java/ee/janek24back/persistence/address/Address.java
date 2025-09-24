@@ -50,5 +50,11 @@ public class Address {
     @Column(name = "type", nullable = false, length = 1)
     private String type;
 
+    @NotNull
+    @Size(max = 20)
+    @Column(name = "postal_code", nullable = false, length = 20)
+    private String postalCode;
+
+
 
 }

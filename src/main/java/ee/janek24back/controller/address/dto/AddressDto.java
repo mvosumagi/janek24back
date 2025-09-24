@@ -1,4 +1,4 @@
-package ee.janek24back.controller.address;
+package ee.janek24back.controller.address.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -23,5 +23,7 @@ public class AddressDto {
 
     @Size(max = 255)
     private String address;
+
+
 
 }

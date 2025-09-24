@@ -31,14 +31,17 @@ public class UserController {
     @Operation(
             summary = "Lisab useri sisestatud andmete alusel",
             description = "Lisab useri sisestatud andmete alusel")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "403", description = "Mingi viga", content = @Content(schema = @Schema(implementation = ApiError.class)))})
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Loodud"),
+            @ApiResponse(responseCode = "400", description = "Vigased andmed",
+                    content = @Content(schema = @Schema(implementation = ApiError.class))),
+            @ApiResponse(responseCode = "403", description = "Mingi viga",
+                    content = @Content(schema = @Schema(implementation = ApiError.class)))})
 
     public void addUser(@RequestBody @Valid UserDetailDto userDetailDto) {
         userService.addUser(userDetailDto);
+
     }
 }
-
 
 

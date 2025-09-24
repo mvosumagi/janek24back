@@ -1,8 +1,7 @@
-package ee.janek24back.controller.address.dto;
+package ee.janek24back.persistence.address;
 
-import ee.janek24back.controller.address.AddressDto;
+import ee.janek24back.controller.address.dto.AddressDto;
 import ee.janek24back.controller.user.dto.UserDetailDto;
-import ee.janek24back.persistence.address.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -20,4 +19,5 @@ public interface AddressMapper {
 
     @Mapping(source = "details", target = "address")
     AddressDto toDto(Address address);
+
 }

@@ -54,7 +54,9 @@ public class UserDto implements Serializable {
     @Size(max = 60)
     private String password;
 
-
+    @NotNull
+    @Size(max = 20)
+    private String postalCode;
 
 
 
