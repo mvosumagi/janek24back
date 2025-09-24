@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,8 +34,9 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "403", description = "Mingi viga", content = @Content(schema = @Schema(implementation = ApiError.class)))})
+
     public void addUser(@RequestBody @Valid UserDetailDto userDetailDto) {
-       userService.addUser(userDetailDto);
+        userService.addUser(userDetailDto);
     }
 }
 

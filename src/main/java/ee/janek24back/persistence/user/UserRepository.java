@@ -14,6 +14,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select (count(u) > 0) from User u where upper(u.username) = upper(:username)")
     boolean userExistsBy(String username);
 
-    @Query("select r from Role r where r.name = 'CUSTOMER'")
-    Role getRoleCustomer();
 }
