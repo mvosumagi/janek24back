@@ -1,28 +1,31 @@
 package ee.janek24back.controller.service;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.Value;
+import ee.janek24back.service.ServiceService;
+import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.List;
 
-/**
- * DTO for {@link ee.janek24back.persistence.service.Service}
- */
-@Value
-public class ServiceController implements Serializable {
-    Integer id;
-    Integer serviceCategoryId;
-    @NotNull
-    LocalDate validFrom;
-    @NotNull
-    LocalDate validTo;
-    @NotNull
-    BigDecimal unitCost;
-    Integer currencyIsId;
-    @NotNull
-    @Size(max = 1)
-    String status;
+@RestController
+@RequiredArgsConstructor
+public class ServiceController {
+
+    private final ServiceService serviceService;
+
+    @GetMapping("/my-service")
+    @Operation(
+            summary = "Leiab süsteemist (andmebaasist service tabelist) kõik serviced.",
+            description = "Tagastab info koos serviceId ja serviceName'ga"
+    )
+    public List<ServiceInfo> findServices() {
+        return serviceService.findServices();
+    }
+
+    @GetMapping("/services/search")
+    public List<ServiceInfo> searchServices(@RequestParam String q) {
+        return serviceService.searchServices(q);
+    }
 }
