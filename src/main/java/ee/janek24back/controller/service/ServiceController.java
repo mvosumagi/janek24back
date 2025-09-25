@@ -24,8 +24,12 @@ public class ServiceController {
         return serviceService.findServices();
     }
 
-    @GetMapping("/services/search")
-    public List<ServiceInfo> searchServices(@RequestParam String q) {
-        return serviceService.searchServices(q);
+    @GetMapping("/services")
+    @Operation(
+            summary = "Leiab kõik serviced otsides osa description_short.",
+            description = "Leiab kõik serviced otsides osa description_short."
+            )
+    public List<ServiceInfo> searchServices(@RequestParam String partialDescription) {
+        return serviceService.searchServices(partialDescription);
     }
 }

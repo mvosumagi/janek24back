@@ -20,9 +20,9 @@ public class ServiceService {
         return serviceMapper.toServiceInfos(services);
     }
 
-    public List<ServiceInfo> searchServices(String q) {
+    public List<ServiceInfo> searchServices(String partialDescription) {
         List<ee.janek24back.persistence.service.Service> filtered = serviceRepository
-                .findByNameContainingIgnoreCaseOrDescriptionShortContainingIgnoreCase(q, q);
+                .findByNameContainingIgnoreCaseOrDescriptionShortContainingIgnoreCase(partialDescription, partialDescription);
         return serviceMapper.toServiceInfos(filtered);
     }
 }
