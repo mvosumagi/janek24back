@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * DTO for {@link ee.janek24back.persistence.service.ServiceCategory}
@@ -19,4 +20,7 @@ import java.io.Serializable;
 public class ServiceInfo implements Serializable {
     private Integer serviceId;
     private String serviceName;
+    private String descriptionShort;
+    private BigDecimal unitCost;
+
 }
