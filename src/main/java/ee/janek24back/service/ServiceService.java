@@ -6,23 +6,29 @@ import ee.janek24back.persistence.service.ServiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
+
 public class ServiceService {
 
     private final ServiceRepository serviceRepository;
     private final ServiceMapper serviceMapper;
 
-    public List<ServiceInfo> findServices() {
-        List<ee.janek24back.persistence.service.Service> services = serviceRepository.findAll();
-        return serviceMapper.toServiceInfos(services);
+    public ServiceInfo findService() {
+        return null;
     }
 
-    public List<ServiceInfo> searchServices(String partialDescription) {
-        List<ee.janek24back.persistence.service.Service> filtered = serviceRepository
-                .findByNameContainingIgnoreCaseOrDescriptionShortContainingIgnoreCase(partialDescription, partialDescription);
-        return serviceMapper.toServiceInfos(filtered);
-    }
+//    public ServiceInfo findService(Integer serviceId) {
+//        ServiceInfo serviceInfo = getValidServiceInfo(serviceId);
+//        return serviceInfo;
+//    }
+
+//    private ServiceInfo getValidServiceInfo(Integer serviceId) {
+//    }
+
+//    public List<ServiceInfo> findServices() {
+//        List<ee.janek24back.persistence.service.Service> services = serviceRepository.findAll();
+//        return serviceMapper.toServiceInfos(services);
+//    }
+
 }

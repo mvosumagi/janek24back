@@ -13,11 +13,9 @@ public interface ServiceMapper {
 
     @Mapping(source = "id", target = "serviceId")
     @Mapping(source = "name", target = "serviceName")
-//    @Mapping(source = "descriptionShort", target = "descriptionShort")
-//    @Mapping(source = "unitCost", target = "unitCost")
-    ServiceInfo toServiceInfo (Service service);
+    ServiceInfo toServiceInfo(Service service);
 
-    List<ServiceInfo> toServiceInfos (List<Service> services);
+    List<ServiceInfo> toServiceInfos(List<Service> services);
 
 
 }
