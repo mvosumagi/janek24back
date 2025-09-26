@@ -1,10 +1,12 @@
 INSERT INTO janek24.country (id, name) VALUES (default, 'Estonia');
 INSERT INTO janek24.country (id, name) VALUES (default, 'Latvia');
+INSERT INTO janek24.country (id, name) VALUES (default, 'Sweden');
 
 
 INSERT INTO janek24.city (id, country_id, name) VALUES (default, 1, 'Tallinn');
 INSERT INTO janek24.city (id, country_id, name) VALUES (default, 1, 'Tartu');
 INSERT INTO janek24.city (id, country_id, name) VALUES (default, 2, 'Riga');
+INSERT INTO janek24.city (id, country_id, name) VALUES (default, 3, 'Stockholm');
 
 INSERT INTO currency (id, short_code, description) VALUES (default, 'EUR', 'Euro');
 
@@ -35,6 +37,9 @@ VALUES (default, (SELECT id FROM "user" WHERE username='lauri'), (SELECT id FROM
 
 INSERT INTO address (id, user_id, country_id, city_id, county, details, postal_code, type)
 VALUES (default, (SELECT id FROM "user" WHERE username='mart'), (SELECT id FROM country WHERE name='Estonia'), (SELECT id FROM city WHERE name='Tallinn'), 'Harju County', 'Pärnu mnt 67', '10134', 'H');
+
+INSERT INTO service_category (id, name, description)
+VALUES (default, 'Unlisted', 'User-requested service not yet in catalog.');
 
 INSERT INTO service_category (id, name, description)
 VALUES (default, 'Home Cleaning', 'Professional house cleaning providerServices to keep your home spotless and organized.');
