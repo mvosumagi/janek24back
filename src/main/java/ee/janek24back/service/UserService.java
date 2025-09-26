@@ -128,7 +128,9 @@ public class UserService {
             uc.setCompany(company);
             userCompanyRepository.save(uc);
         }
+    }
 
-
+    public boolean isUsernameAvailable(String username) {
+        return !userRepository.userExistsBy(username);
     }
 }

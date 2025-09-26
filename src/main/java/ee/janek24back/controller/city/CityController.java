@@ -13,7 +13,7 @@ import java.util.List;
 public class CityController {
     private final CityService cityService;
 
-    @GetMapping("/api/countries/{countryId}/cities")
+    @GetMapping("/countries/{countryId}/cities")
     public List<CityDto> byCountry(@PathVariable Integer countryId) {
         return cityService.listByCountry(countryId);
     }
