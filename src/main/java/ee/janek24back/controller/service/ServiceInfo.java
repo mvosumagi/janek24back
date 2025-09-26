@@ -14,7 +14,9 @@ import java.math.BigDecimal;
 
 public class ServiceInfo implements Serializable {
     private Integer serviceId;
+    private Integer categoryId;
     private String serviceName;
     private BigDecimal unitCost;
     private String descriptionShort;
+    private String imageData;
 }

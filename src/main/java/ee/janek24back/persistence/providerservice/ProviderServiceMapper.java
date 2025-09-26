@@ -12,6 +12,7 @@ import java.util.List;
 public interface ProviderServiceMapper {
 
     @Mapping(source = "id", target = "serviceId")
+    @Mapping(source = "serviceCategory.id", target = "categoryId")
     @Mapping(source = "name", target = "serviceName")
     @Mapping(source = "descriptionShort", target = "descriptionShort")
     @Mapping(source = "unitCost", target = "unitCost")
