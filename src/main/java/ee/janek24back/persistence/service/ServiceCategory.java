@@ -25,4 +25,5 @@ public class ServiceCategory {
     @NotNull
     @Column(name = "description", nullable = false)
     private String description;
+
 }
