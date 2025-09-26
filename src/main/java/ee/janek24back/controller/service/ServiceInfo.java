@@ -14,7 +14,8 @@ import java.io.Serializable;
 public class ServiceInfo implements Serializable {
     private Integer serviceId;
     private String serviceName;
-    private String serviceNNNName;
+    private String description_short;
+    private String unit_cost;
 
 
 }
