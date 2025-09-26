@@ -11,25 +11,19 @@ import java.time.Instant;
 public class InboxDto implements Serializable {
     Integer id;
     Integer receiverUserId;
-    String receiverUserEmail;
+    String receiverUsername;
     String receiverUserFirstName;
     String receiverUserLastName;
     Integer senderUserId;
-    String senderUserEmail;
+    String senderUsername;
     String senderUserFirstName;
     String senderUserLastName;
-    @NotNull
-    @Size(max = 100)
+    @NotNull @Size(max = 100)
     String title;
-    @NotNull
-    @Size(max = 1000)
+    @NotNull @Size(max = 1000)
     String message;
-    @NotNull
-    @Size(max = 1)
+    @NotNull @Size(max = 1)
     String status;
     @NotNull
     Instant createdAt;
-    Integer serviceId;
-    String serviceName;
-    Integer orderId;
 }

@@ -1,23 +1,27 @@
 package ee.janek24back.persistence.inbox;
 
 import ee.janek24back.controller.inbox.dto.InboxDto;
-import org.mapstruct.*;
+import ee.janek24back.persistence.inbox.Inbox;
+import org.springframework.stereotype.Component;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)public interface InboxMapper {
-    @Mapping(source = "orderId", target = "order.id")
-    @Mapping(source = "serviceName", target = "service.name")
-    @Mapping(source = "serviceId", target = "service.id")
-    @Mapping(source = "senderUserLastName", target = "senderUser.lastName")
-    @Mapping(source = "senderUserFirstName", target = "senderUser.firstName")
-    @Mapping(source = "senderUserEmail", target = "senderUser.email")
-    @Mapping(source = "senderUserId", target = "senderUser.id")
-    @Mapping(source = "receiverUserLastName", target = "receiverUser.lastName")
-    @Mapping(source = "receiverUserFirstName", target = "receiverUser.firstName")
-    @Mapping(source = "receiverUserEmail", target = "receiverUser.email")
-    @Mapping(source = "receiverUserId", target = "receiverUser.id")
-    Inbox toDto(InboxDto inboxDto);
-
-    @InheritInverseConfiguration(name = "toEntity")InboxDto toDto(Inbox inbox);
-
-    @InheritConfiguration(name = "toEntity")@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)Inbox partialUpdate(InboxDto inboxDto, @MappingTarget Inbox inbox);
+@Component
+public class InboxMapper {
+    public InboxDto toDto(Inbox in) {
+        if (in == null) return null;
+        return new InboxDto(
+                in.getId(),
+                in.getReceiverUser()!=null ? in.getReceiverUser().getId() : null,
+                in.getReceiverUser()!=null ? in.getReceiverUser().getUsername() : null,
+                in.getReceiverUser()!=null ? in.getReceiverUser().getFirstName() : null,
+                in.getReceiverUser()!=null ? in.getReceiverUser().getLastName() : null,
+                in.getSenderUser()!=null ? in.getSenderUser().getId() : null,
+                in.getSenderUser()!=null ? in.getSenderUser().getUsername() : null,
+                in.getSenderUser()!=null ? in.getSenderUser().getFirstName() : null,
+                in.getSenderUser()!=null ? in.getSenderUser().getLastName() : null,
+                in.getTitle(),
+                in.getMessage(),
+                in.getStatus(),
+                in.getCreatedAt()
+        );
+    }
 }

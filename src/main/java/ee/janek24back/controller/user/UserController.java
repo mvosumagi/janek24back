@@ -2,6 +2,7 @@ package ee.janek24back.controller.user;
 
 import ee.janek24back.controller.user.dto.UserDetailDto;
 import ee.janek24back.controller.user.dto.UserDto;
+import ee.janek24back.controller.user.dto.UsernameAvailabilityResponse;
 import ee.janek24back.infrastructure.error.ApiError;
 import ee.janek24back.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,6 +26,13 @@ public class UserController {
             description = "Tagastab user info UserId alusel")
     public UserDto findUser(@RequestParam Integer userId) {
         return userService.findUser(userId);
+    }
+
+    @GetMapping("/user/availability")
+    @Operation(summary = "Kontrollib, kas kasutajanimi on vaba", description = "Tagastab boolean lipu 'available'")
+    public UsernameAvailabilityResponse checkUsername(@RequestParam String username) {
+        boolean available = userService.isUsernameAvailable(username);
+        return new UsernameAvailabilityResponse(available);
     }
 
     @PostMapping("/user")
