@@ -1,6 +1,6 @@
 package ee.janek24back.controller.service;
 
-import ee.janek24back.service.ServiceService;
+import ee.janek24back.service.SearchService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,25 +11,16 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class ServiceController {
+public class SearchController {
 
-    private final ServiceService serviceService;
+    private final SearchService searchService;
 
-    @GetMapping("/my-service")
-    @Operation(
-            summary = "Leiab süsteemist (andmebaasist service tabelist) kõik serviced.",
-            description = "Tagastab info koos serviceId ja serviceName'ga"
-    )
-    public List<ServiceInfo> findServices() {
-        return serviceService.findServices();
-    }
-
-    @GetMapping("/services")
+    @GetMapping("/services/search")
     @Operation(
             summary = "Leiab kõik serviced otsides osa description_short.",
             description = "Leiab kõik serviced otsides osa description_short."
-            )
+    )
     public List<ServiceInfo> searchServices(@RequestParam String partialDescription) {
-        return serviceService.searchServices(partialDescription);
+        return searchService.searchServices(partialDescription);
     }
 }

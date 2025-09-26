@@ -17,6 +17,4 @@ public class ServiceInfo implements Serializable {
     private String serviceName;
     private BigDecimal unitCost;
     private String descriptionShort;
-
-
 }

@@ -9,15 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/countries")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 public class CountryController {
     private final CountryService countryService;
 
-    @GetMapping
-    public List<CountryDto> all() {
-        return countryService.list();
+    @GetMapping("/countries")
+    public List<CountryDto> findCountries() {
+        return countryService.findCountries();
     }
 
 

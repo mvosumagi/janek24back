@@ -14,8 +14,8 @@ public class CityController {
     private final CityService cityService;
 
     @GetMapping("/countries/{countryId}/cities")
-    public List<CityDto> byCountry(@PathVariable Integer countryId) {
-        return cityService.listByCountry(countryId);
+    public List<CityDto> findCitiesBy(@PathVariable Integer countryId) {
+        return cityService.findCitiesBy(countryId);
     }
 
 }

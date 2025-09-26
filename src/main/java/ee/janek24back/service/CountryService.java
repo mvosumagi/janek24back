@@ -2,6 +2,7 @@ package ee.janek24back.service;
 
 import ee.janek24back.controller.country.dto.CountryDto;
 import ee.janek24back.persistence.country.Country;
+import ee.janek24back.persistence.country.CountryMapper;
 import ee.janek24back.persistence.country.CountryRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -14,12 +15,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CountryService {
     private final CountryRepository countryRepository;
+    private final CountryMapper countryMapper;
 
-    public List<CountryDto> list() {
-        return countryRepository.findAll().stream()
-                .sorted(Comparator.comparing(Country::getName, String.CASE_INSENSITIVE_ORDER))
-                .map(c -> new CountryDto(c.getId(), c.getName()))
-                .toList();
+    public List<CountryDto> findCountries() {
+        List<Country> countries = countryRepository.findAll();
+        return countryMapper.toCountryDtos(countries);
     }
 
     public CountryDto findById(Integer id) {

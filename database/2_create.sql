@@ -50,7 +50,7 @@ CREATE TABLE service_category (
                                   description varchar(255) NOT NULL
 );
 
-CREATE TABLE service (
+CREATE TABLE provider_service (
                          id serial PRIMARY KEY,
                          user_id int NOT NULL REFERENCES "user"(id),
                          service_category_id int NOT NULL REFERENCES service_category(id),
@@ -67,7 +67,7 @@ CREATE TABLE service (
 CREATE TABLE "order" (
                          id serial PRIMARY KEY,
                          user_id int NOT NULL REFERENCES "user"(id),
-                         service_id int NOT NULL REFERENCES service(id),
+                         provider_service_id int NOT NULL REFERENCES provider_service(id),
                          date date NOT NULL,
                          user_comment varchar(1000) NOT NULL,
                          status varchar(1) NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE inbox (
                        message varchar(1000) NOT NULL,
                        status varchar(1) NOT NULL,
                        created_at timestamp NOT NULL,
-                       service_id int NULL REFERENCES service(id),
+                       provider_service_id int NULL REFERENCES provider_service(id),
                        order_id int NULL REFERENCES "order"(id)
 );
 
