@@ -1,8 +1,6 @@
 package ee.janek24back.service;
 
 import ee.janek24back.controller.teenus.dto.TeenusDto;
-import ee.janek24back.controller.user.dto.UserDto;
-import ee.janek24back.persistence.role.Role;
 import ee.janek24back.persistence.teenus.Teenus;
 import ee.janek24back.persistence.teenus.TeenusMapper;
 import ee.janek24back.persistence.teenus.TeenusRepository;
@@ -11,12 +9,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TeenusService {
 
     private final TeenusMapper teenusMapper;
     private final TeenusRepository teenusRepository;
+
+
 
     @Transactional
     public void addTeenus(Integer userId, TeenusDto teenusDto) {
@@ -32,7 +34,11 @@ public class TeenusService {
         return teenus;
     }
 
+    public List<TeenusDto> getUserTeenused(Integer userId) {
 
-
-
+        List<Teenus> teenused = teenusRepository.findBy(userId);
+        return teenused.stream()
+                .map(teenusMapper::toTeenusDto)
+                .toList();
+    }
 }

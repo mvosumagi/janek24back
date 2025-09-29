@@ -20,10 +20,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -43,4 +42,12 @@ public class TeenusController {
     public void addTeenus(@RequestParam Integer userId, @RequestBody @Valid TeenusDto teenusDto) {
         teenusService.addTeenus(userId, teenusDto);
     }
+
+    @GetMapping("/teenus")
+    @Operation(summary = "Tagastab kasutaja teenused")
+    public List<TeenusDto> getUserTeenused(@RequestParam Integer userId) {
+        return teenusService.getUserTeenused(userId);
+    }
+
+
 }
