@@ -1,8 +1,7 @@
 package ee.janek24back.service;
 
-import ee.janek24back.controller.user.dto.UserDetailDto;
+import ee.janek24back.controller.user.dto.PasswordUpdate;
 import ee.janek24back.controller.user.dto.UserDto;
-import ee.janek24back.controller.user.dto.UserFullDto;
 import ee.janek24back.infrastructure.exception.ForbiddenException;
 import ee.janek24back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.janek24back.persistence.address.Address;
@@ -23,10 +22,12 @@ import ee.janek24back.persistence.user.UserMapper;
 import ee.janek24back.persistence.user.UserRepository;
 import ee.janek24back.persistence.usercompany.UserCompany;
 import ee.janek24back.persistence.usercompany.UserCompanyRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -51,19 +52,19 @@ public class UserService {
     }
 
     @Transactional
-    public void addUser(UserDetailDto userDetailDto) {
-        if (userRepository.userExistsBy(userDetailDto.getUsername())) {
+    public void addUser(String username, String password, UserDto userDto) {
+        if (userRepository.userExistsBy(username)) {
             throw new ForbiddenException("The username is already taken", 132132);
         }
 
-        User user = createUser(userDetailDto);
+        User user = createUser(username, password,userDto);
         userRepository.save(user);
 
-        Address address = createAddress(userDetailDto, user);
+        Address address = createAddress(userDto, user);
         addressRepository.save(address);
 
-        if (Boolean.TRUE.equals(userDetailDto.getIsCompany())) {
-            Company company = getOrCreateCompany(userDetailDto);
+        if (Boolean.TRUE.equals(userDto.getIsCompany())) {
+            Company company = getOrCreateCompany(userDto);
             linkUserToCompany(user, company);
         }
     }
@@ -78,21 +79,24 @@ public class UserService {
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("userId", userId));
     }
 
-    private User createUser(UserDetailDto userDetailDto) {
+    private User createUser(String username, String password, UserDto userDto) {
         Role role = roleRepository.getRoleCustomer();
-        User user = userMapper.toUser(userDetailDto);
+        User user = userMapper.toUser(userDto);
         user.setRole(role);
+        user.setUsername(username);
+        user.setPassword(password);
         return user;
     }
 
-    private Address createAddress(UserDetailDto dto, User user) {
-        Address address = addressMapper.toAddress(dto);
+    private Address createAddress(UserDto userDto, User user) {
+        Country country = getValidCountry(userDto.getCountryId());
+        City city = getValidCity(userDto.getCityId());
+
+
+        Address address = addressMapper.toAddress(userDto);
         address.setUser(user);
-        Country country = getValidCountry(dto.getCountryId());
         address.setCountry(country);
-        City city = getValidCity(dto.getCityId());
         address.setCity(city);
-        address.setType("H");
         return address;
     }
 
@@ -106,16 +110,16 @@ public class UserService {
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("cityId", cityId));
     }
 
-    private Company getOrCreateCompany(UserDetailDto dto) {
-        return companyRepository.findByNumber(dto.getRegNo())
+    private Company getOrCreateCompany(UserDto userDto) {
+        return companyRepository.findByNumber(userDto.getRegNo())
                 .map(existing -> {
-                    if (dto.getCompanyName() != null && !dto.getCompanyName().isBlank()
-                            && !dto.getCompanyName().equals(existing.getName())) {
-                        existing.setName(dto.getCompanyName());
+                    if (userDto.getCompanyName() != null && !userDto.getCompanyName().isBlank()
+                            && !userDto.getCompanyName().equals(existing.getName())) {
+                        existing.setName(userDto.getCompanyName());
                     }
                     return existing;
                 })
-                .orElseGet(() -> companyRepository.save(companyMapper.toCompany(dto)));
+                .orElseGet(() -> companyRepository.save(companyMapper.toCompany(userDto)));
     }
 
     private void linkUserToCompany(User user, Company company) {
@@ -131,14 +135,47 @@ public class UserService {
         return !userRepository.userExistsBy(username);
     }
 
-    public UserFullDto getUser(Integer userId) {
+    public UserDto getUser(Integer userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("User not found", userId));
 
-        Optional<Address> addressOpt = addressRepository.findTopByUser_IdOrderByIdDesc(userId);
-        Optional<UserCompany> ucOpt = userCompanyRepository.findFirstByUser_Id(userId);
-        Company company = ucOpt.map(UserCompany::getCompany).orElse(null);
+        // eraldi meetod, getLatestAddress
+        List<Address> addresses = addressRepository.findAddressesBy(user);
+        Address address = addresses.get(0);
 
-        return userFullMapper.toDto(user, addressOpt.orElse(null), company);
+        Optional<UserCompany> optionalUserCompany = userCompanyRepository.findCompanyBy(user);
+
+        UserDto userDto = userFullMapper.toUserDto(user);
+
+        // eraldi meetod, setAddress info
+        userDto.setState(address.getCounty());
+        userDto.setAddress(address.getDetails());
+        userDto.setCountryId(address.getCountry().getId());
+        userDto.setCityId(address.getCity().getId());
+        userDto.setState(address.getCounty());
+        userDto.setPostalCode(address.getPostalCode());
+
+        if (optionalUserCompany.isPresent()) {
+            Company company = optionalUserCompany.get().getCompany();
+            userDto.setIsCompany(true);
+            userDto.setCompanyName(company.getName());
+            userDto.setRegNo(company.getNumber());
+        } else {
+            userDto.setIsCompany(false);
+            userDto.setCompanyName("");
+            userDto.setRegNo("");
+        }
+
+
+        return userDto;
+    }
+
+    public void updateUser(Integer userId, UserDto userDto) {
+        // to implement
+    }
+
+    public void updatePassword(PasswordUpdate passwordUpdate) {
+        // to implement
+
     }
 }

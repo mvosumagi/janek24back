@@ -1,6 +1,6 @@
 package ee.janek24back.persistence.company;
 
-import ee.janek24back.controller.user.dto.UserDetailDto;
+import ee.janek24back.controller.user.dto.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -11,5 +11,5 @@ public interface CompanyMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(source = "companyName", target = "name")
     @Mapping(source = "regNo", target = "number")
-    Company toCompany(UserDetailDto dto);
+    Company toCompany(UserDto userDto);
 }

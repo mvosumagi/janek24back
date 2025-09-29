@@ -19,10 +19,6 @@ import java.io.Serializable;
 public class UserDto implements Serializable {
 
     @NotNull
-    @Size(max = 60)
-    private String username;
-
-    @NotNull
     @Size(min = 1, max = 100)
     private String firstName;
 
@@ -51,13 +47,16 @@ public class UserDto implements Serializable {
     private String address;
 
     @NotNull
-    @Size(max = 60)
-    private String password;
-
-    @NotNull
     @Size(max = 20)
     private String postalCode;
 
+    @NotNull
+    private Boolean isCompany;
 
+    @Size(max = 255)
+    private String companyName;
+
+    @Size(max = 100)
+    private String regNo;
 
     }
