@@ -1,7 +1,7 @@
 package ee.janek24back.controller.user;
 
 import ee.janek24back.controller.user.dto.UserDetailDto;
-import ee.janek24back.controller.user.dto.UserDto;
+import ee.janek24back.controller.user.dto.UserFullDto;
 import ee.janek24back.controller.user.dto.UsernameAvailabilityResponseDto;
 import ee.janek24back.infrastructure.error.ApiError;
 import ee.janek24back.service.UserService;
@@ -20,20 +20,13 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/user-small")
-    @Operation(
-            summary = "Tagastab user info UserId alusel",
-            description = "Tagastab user info UserId alusel")
-    public UserDto findUser(@RequestParam Integer userId) {
-        return userService.findUser(userId);
-    }
-
     @GetMapping("/user")
-    @Operation(
-            summary = "Tagastab user Detail info UserId alusel",
-            description = "Tagastab user Detail info UserId alusel")
-    public UserDto findUserDetail(@RequestParam Integer userId) {
-        return userService.findUser(userId);
+    @Operation(summary = "Tagastab kasutaja profiili", description = "Pärib kasutaja täisprofiili ID alusel")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "Userit ei leitud", content = @Content(schema = @Schema(implementation = ApiError.class)))})
+    public UserFullDto getUser(@RequestParam Integer userId) {
+        return userService.getUser(userId);
     }
 
 
@@ -50,14 +43,11 @@ public class UserController {
             description = "Lisab useri sisestatud andmete alusel")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Loodud"),
-            @ApiResponse(responseCode = "400", description = "Vigased andmed",
-                    content = @Content(schema = @Schema(implementation = ApiError.class))),
-            @ApiResponse(responseCode = "403", description = "Mingi viga",
-                    content = @Content(schema = @Schema(implementation = ApiError.class)))})
+            @ApiResponse(responseCode = "400", description = "Vigased andmed", content = @Content(schema = @Schema(implementation = ApiError.class))),
+            @ApiResponse(responseCode = "403", description = "Mingi viga", content = @Content(schema = @Schema(implementation = ApiError.class)))})
 
     public void addUser(@RequestBody @Valid UserDetailDto userDetailDto) {
         userService.addUser(userDetailDto);
-
     }
 }
 

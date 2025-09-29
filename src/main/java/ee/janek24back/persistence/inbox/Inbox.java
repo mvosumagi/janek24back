@@ -1,7 +1,7 @@
 package ee.janek24back.persistence.inbox;
 
 import ee.janek24back.persistence.order.Order;
-import ee.janek24back.persistence.service.Service;
+import ee.janek24back.persistence.providerservice.ProviderService;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -52,7 +52,7 @@ public class Inbox {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id")
-    private Service service;
+    private ProviderService providerService;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")

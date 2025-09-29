@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 
 @Data
@@ -13,9 +14,9 @@ import java.io.Serializable;
 
 public class ServiceInfo implements Serializable {
     private Integer serviceId;
+    private Integer categoryId;
     private String serviceName;
-    private String description_short;
-    private String unit_cost;
-
-
+    private BigDecimal unitCost;
+    private String descriptionShort;
+    private String imageData;
 }

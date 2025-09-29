@@ -1,6 +1,6 @@
 package ee.janek24back.persistence.order;
 
-import ee.janek24back.persistence.service.Service;
+import ee.janek24back.persistence.providerservice.ProviderService;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -28,7 +28,7 @@ public class Order {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
+    private ProviderService providerService;
 
     @NotNull
     @Column(name = "date", nullable = false)

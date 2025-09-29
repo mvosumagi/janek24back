@@ -2,6 +2,7 @@ package ee.janek24back.service;
 
 import ee.janek24back.controller.user.dto.UserDetailDto;
 import ee.janek24back.controller.user.dto.UserDto;
+import ee.janek24back.controller.user.dto.UserFullDto;
 import ee.janek24back.infrastructure.exception.ForbiddenException;
 import ee.janek24back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.janek24back.persistence.address.Address;
@@ -17,6 +18,7 @@ import ee.janek24back.persistence.country.CountryRepository;
 import ee.janek24back.persistence.role.Role;
 import ee.janek24back.persistence.role.RoleRepository;
 import ee.janek24back.persistence.user.User;
+import ee.janek24back.persistence.user.UserFullMapper;
 import ee.janek24back.persistence.user.UserMapper;
 import ee.janek24back.persistence.user.UserRepository;
 import ee.janek24back.persistence.usercompany.UserCompany;
@@ -25,13 +27,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    public static final String REQUEST_PARAM_NAME_USER_ID = "userId";
-    public static final String REQUEST_PARAM_NAME_COUNTRY_ID = "countryId";
-    public static final String REQUEST_PARAM_NAME_CITY_ID = "cityId";
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final AddressMapper addressMapper;
@@ -42,6 +43,7 @@ public class UserService {
     private final CompanyRepository companyRepository;
     private final CompanyMapper companyMapper;
     private final UserCompanyRepository userCompanyRepository;
+    private final UserFullMapper userFullMapper;
 
     public UserDto findUser(Integer userId) {
         UserDto userDto = getValidUserDto(userId);
@@ -65,11 +67,6 @@ public class UserService {
             linkUserToCompany(user, company);
         }
     }
-    // todo: Address rea lisamine andmbeaasi
-    // todo: leia vajalikud foregin key objewktis
-    // todo: mapperiga lood uuse addreess objekti, saad infi userDetailDtost
-    // todo: salvestad
-    // todo: Kui on company, lisad company andmed andmebaasi
 
     private UserDto getValidUserDto(Integer userId) {
         User user = getValidUser(userId);
@@ -78,7 +75,7 @@ public class UserService {
 
     private User getValidUser(Integer userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new PrimaryKeyNotFoundException(REQUEST_PARAM_NAME_USER_ID, userId));
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("userId", userId));
     }
 
     private User createUser(UserDetailDto userDetailDto) {
@@ -101,12 +98,12 @@ public class UserService {
 
     private Country getValidCountry(Integer countryId) {
         return countryRepository.findById(countryId)
-                .orElseThrow(() -> new PrimaryKeyNotFoundException(REQUEST_PARAM_NAME_COUNTRY_ID, countryId));
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("countryId", countryId));
     }
 
     private City getValidCity(Integer cityId) {
         return cityRepository.findById(cityId)
-                .orElseThrow(() -> new PrimaryKeyNotFoundException(REQUEST_PARAM_NAME_CITY_ID, cityId));
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("cityId", cityId));
     }
 
     private Company getOrCreateCompany(UserDetailDto dto) {
@@ -132,5 +129,16 @@ public class UserService {
 
     public boolean isUsernameAvailable(String username) {
         return !userRepository.userExistsBy(username);
+    }
+
+    public UserFullDto getUser(Integer userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("User not found", userId));
+
+        Optional<Address> addressOpt = addressRepository.findTopByUser_IdOrderByIdDesc(userId);
+        Optional<UserCompany> ucOpt = userCompanyRepository.findFirstByUser_Id(userId);
+        Company company = ucOpt.map(UserCompany::getCompany).orElse(null);
+
+        return userFullMapper.toDto(user, addressOpt.orElse(null), company);
     }
 }

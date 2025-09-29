@@ -1,4 +1,4 @@
-package ee.janek24back.persistence.service;
+package ee.janek24back.persistence.servicecategory;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

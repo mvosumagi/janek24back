@@ -1,6 +1,7 @@
-package ee.janek24back.persistence.service;
+package ee.janek24back.persistence.providerservice;
 
 import ee.janek24back.persistence.currency.Currency;
+import ee.janek24back.persistence.servicecategory.ServiceCategory;
 import ee.janek24back.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -14,8 +15,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "service", schema = "janek24")
-public class Service {
+@Table(name = "provider_service", schema = "janek24")
+public class ProviderService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
