@@ -4,6 +4,7 @@ import ee.janek24back.service.SearchService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,9 @@ public class SearchController {
     )
     public List<ServiceInfo> searchServices(@RequestParam String partialDescription) {
         return searchService.searchServices(partialDescription);
+    }
+    @GetMapping("/services/{serviceId}")
+    public ServiceInfo getServiceById(@PathVariable Integer serviceId) {
+        return searchService.getServiceById(serviceId);
     }
 }
