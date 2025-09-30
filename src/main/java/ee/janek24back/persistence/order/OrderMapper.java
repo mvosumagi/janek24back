@@ -9,4 +9,10 @@ public interface OrderMapper {
     Order toOrder(OrderDto orderDto);
 
 
+
+    @Mapping(source = "providerService.id", target = "providerServiceId")
+    OrderDto toOrderDto(Order order);
+
+
+
 }
