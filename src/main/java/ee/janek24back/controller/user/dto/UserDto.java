@@ -1,6 +1,5 @@
 package ee.janek24back.controller.user.dto;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,9 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-/**
- * DTO for {@link ee.janek24back.persistence.user.User}
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -59,4 +55,4 @@ public class UserDto implements Serializable {
     @Size(max = 100)
     private String regNo;
 
-    }
+}
