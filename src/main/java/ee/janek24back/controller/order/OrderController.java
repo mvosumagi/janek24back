@@ -11,13 +11,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/order")
 @RequiredArgsConstructor
 public class OrderController {
 
@@ -27,24 +24,14 @@ public class OrderController {
     @PostMapping("/order")
     @Operation(
             summary = "Lisab orderi",
-            description = "Lisab orderi")
+            description = "Lisab orderi"
+    )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "order edukalt süsteemi lisatud"),
-            @ApiResponse(responseCode = "400", description = "Vigased andmed", content = @Content(schema = @Schema(implementation = ApiError.class)))})
-
-
+            @ApiResponse(responseCode = "200", description = "Order edukalt süsteemi lisatud"),
+            @ApiResponse(responseCode = "400", description = "Vigased andmed", content = @Content(schema = @Schema(implementation = ApiError.class)))
+    })
     public void addOrder(@RequestParam Integer userId, @RequestBody @Valid OrderDto orderDto) {
+        System.out.println("Order received: " + orderDto);
         orderService.addOrder(userId, orderDto);
     }
 }
-
-//    @GetMapping("/orders")
-//    @Operation(summary = "Tagastab orderid kasutajaId alsusel",
-//            description = "tagastab orderi kasutaja ID alusel")
-//    @ApiResponses({
-//            @ApiResponse(responseCode = "200", description = "OK"),
-//            @ApiResponse(responseCode = "404", description = "Ordereid ei leitud", content = @Content(schema = @Schema(implementation = ApiError.class)))})
-//    public OrderDto getOrder(@RequestParam Integer userId) {
-//        return orderService.getOrder(userId);
-//    }
-

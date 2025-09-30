@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto implements Serializable {
-
     Integer providerServiceId;
     @NotNull
     LocalDate date;

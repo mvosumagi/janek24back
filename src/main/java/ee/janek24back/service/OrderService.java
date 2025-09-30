@@ -5,6 +5,8 @@ import ee.janek24back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.janek24back.persistence.order.Order;
 import ee.janek24back.persistence.order.OrderMapper;
 import ee.janek24back.persistence.order.OrderRepository;
+import ee.janek24back.persistence.providerservice.ProviderService;
+import ee.janek24back.persistence.providerservice.ProviderServiceRepository;
 import ee.janek24back.persistence.user.User;
 import ee.janek24back.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final UserRepository userRepository;
+    private final ProviderServiceRepository providerServiceRepository;
 
     @Transactional
     public void addOrder(Integer userId, OrderDto orderDto) {
@@ -27,15 +30,20 @@ public class OrderService {
 
     private Order createOrder(Integer userId, OrderDto orderDto) {
         User user = getValidUser(userId);
+        ProviderService providerService = getValidProviderService(orderDto.getProviderServiceId());
         Order order = orderMapper.toOrder(orderDto);
         order.setUser(user);
+        order.setProviderService(providerService);
         return order;
     }
+
     private User getValidUser(Integer userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("userId", userId));
     }
 
-
-
+    private ProviderService getValidProviderService(Integer providerServiceId) {
+        return providerServiceRepository.findById(providerServiceId)
+                .orElseThrow(() -> new PrimaryKeyNotFoundException("providerServiceId", providerServiceId));
+    }
 }
