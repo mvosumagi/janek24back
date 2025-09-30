@@ -18,9 +18,9 @@ INSERT INTO company (id, name, number) VALUES (default, 'Lauri Auto OÜ', '87654
 INSERT INTO company (id, name, number) VALUES (default, 'Mart Services OÜ', '11223344');
 
 INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='ADMIN'), 'admin', '123', 'A', '', '', '','');
-INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'rauno', '123', 'A', '', '', '','');
-INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'lauri', '123', 'A', '', '', '','');
-INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'mart', '123', 'A', '', '', '','');
+INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'rauno', '123', 'A', 'Rauno', 'Sillakas', '123456','ww@gg.ee');
+INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'lauri', '123', 'A', 'Lauri', 'Soosaar', '123456','ww@gg.ee');
+INSERT INTO "user" (id, role_id, username, password, status, first_name, last_name, phone_no, email) VALUES (default, (SELECT id FROM role WHERE name='USER'), 'mart', '123', 'A', 'Mart', 'Võsapets', '456132','ww@gg.ee');
 
 INSERT INTO user_company (id, company_id, user_id) VALUES (default, (SELECT id FROM company WHERE name='HomeCare OÜ'), (SELECT id FROM "user" WHERE username='admin'));
 INSERT INTO user_company (id, company_id, user_id) VALUES (default, (SELECT id FROM company WHERE name='Lauri Auto OÜ'), (SELECT id FROM "user" WHERE username='lauri'));
