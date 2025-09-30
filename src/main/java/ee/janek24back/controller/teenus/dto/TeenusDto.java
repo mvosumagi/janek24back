@@ -36,5 +36,4 @@ public class TeenusDto implements Serializable {
     @NotNull
     @Size(max = 1)
     String status;
-    private String imageBase64;
 }

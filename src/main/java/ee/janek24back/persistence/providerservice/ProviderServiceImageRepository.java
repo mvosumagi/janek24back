@@ -7,7 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProviderServiceImageRepository extends JpaRepository<ProviderServiceImage, Long> {
-    Optional<ProviderServiceImage> findByTeenusId(Long teenusId);
 
-    void deleteByTeenusId(Long teenusId);
 }
