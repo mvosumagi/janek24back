@@ -27,7 +27,7 @@ public class Order {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "service_id", nullable = false)
+    @JoinColumn(name = "provider_service_id", nullable = false)
     private ProviderService providerService;
 
     @NotNull
