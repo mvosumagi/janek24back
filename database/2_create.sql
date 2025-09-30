@@ -96,3 +96,14 @@ CREATE TABLE address (
                          postal_code varchar(20) NOT NULL,
                          type varchar(1) NOT NULL
 );
+CREATE TABLE provider_service_image (
+                                        id serial PRIMARY KEY,
+                                        provider_service_id int NOT NULL REFERENCES provider_service(id) ON DELETE CASCADE,
+                                        image_data bytea NOT NULL
+);
+
+CREATE TABLE service_category_image (
+                                        id serial PRIMARY KEY,
+                                        service_category_id int NOT NULL REFERENCES service_category(id) ON DELETE CASCADE,
+                                        image_data bytea NOT NULL
+);
