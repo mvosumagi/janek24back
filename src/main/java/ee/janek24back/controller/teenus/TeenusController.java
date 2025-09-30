@@ -40,6 +40,4 @@ public class TeenusController {
     public List<TeenusDto> getUserTeenused(@RequestParam Integer userId) {
         return teenusService.getUserTeenused(userId);
     }
-
-
 }
