@@ -28,17 +28,6 @@ public class TeenusService {
         Teenus teenus = createTeenus(userId, teenusDto);
         teenusRepository.save(teenus);
 
-        if (teenusDto.getImageBase64() != null && !teenusDto.getImageBase64().isEmpty()) {
-            String base64Data = teenusDto.getImageBase64();
-            if (base64Data.contains(",")) {
-                base64Data = base64Data.split(",")[1];
-            }
-
-            ProviderServiceImage image = new ProviderServiceImage();
-            image.setTeenus(teenus);
-            image.setImageData(BytesConverter.stringToBytes(base64Data));
-            imageRepository.save(image);
-        }
     }
 
     private Teenus createTeenus(Integer userId, TeenusDto teenusDto) {
@@ -54,14 +43,6 @@ public class TeenusService {
         return teenused.stream()
                 .map(teenus -> {
                     TeenusDto dto = teenusMapper.toTeenusDto(teenus);
-
-                    Optional<ProviderServiceImage> optionalImage = imageRepository.findByTeenusId(teenus.getId().longValue());
-                    if (optionalImage.isPresent()) {
-                        ProviderServiceImage image = optionalImage.get();
-                        byte[] imageBytes = image.getImageData();
-                        dto.setImageBase64("data:image/jpeg;base64," + BytesConverter.bytesToString(imageBytes));
-                    }
-
                     return dto;
                 })
                 .toList();
