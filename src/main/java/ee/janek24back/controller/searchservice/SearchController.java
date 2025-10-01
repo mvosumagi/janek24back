@@ -1,21 +1,26 @@
 package ee.janek24back.controller.searchservice;
 
+import ee.janek24back.controller.providerservice.ProviderServiceInfo;
 import ee.janek24back.service.SearchService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/services")
+@RequiredArgsConstructor
+@RequestMapping("/search")
 public class SearchController {
 
-    @Autowired
-    private SearchService searchService;
+    private final SearchService searchService;
 
-    @GetMapping("/search")
-    public List<ServiceInfo> search(@RequestParam String query) {
-        return searchService.searchServices(query);
+    @GetMapping
+    public ResponseEntity<List<ProviderServiceInfo>> search(@RequestParam String query) {
+        List<ProviderServiceInfo> results = searchService.search(query);
+        return ResponseEntity.ok(results);
     }
 }
