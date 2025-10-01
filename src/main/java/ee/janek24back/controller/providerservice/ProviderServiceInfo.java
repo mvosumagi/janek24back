@@ -1,4 +1,4 @@
-package ee.janek24back.controller.service;
+package ee.janek24back.controller.providerservice;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class ServiceInfo implements Serializable {
+public class ProviderServiceInfo implements Serializable {
     private Integer serviceId;
     private Integer categoryId;
     private String serviceName;

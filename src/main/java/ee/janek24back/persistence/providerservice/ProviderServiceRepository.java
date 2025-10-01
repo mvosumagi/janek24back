@@ -12,4 +12,8 @@ public interface ProviderServiceRepository extends JpaRepository<ProviderService
             where upper(p.name) like upper(concat('%', :serviceName, '%')) or upper(p.descriptionShort) like upper(concat('%', :description, '%'))""")
     List<ProviderService> findProviderServicesBy(String serviceName, String description);
 
+    @Query("select p from ProviderService p where p.user.id = :userId")
+    List<ProviderService> findBy(Integer userId);
+
+
 }

@@ -1,6 +1,5 @@
 package ee.janek24back.persistence.order;
 
-import ee.janek24back.persistence.teenus.Teenus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

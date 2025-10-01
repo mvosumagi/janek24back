@@ -1,6 +1,8 @@
 package ee.janek24back.persistence.providerservice;
 
-import ee.janek24back.controller.service.ServiceInfo;
+
+import ee.janek24back.controller.providerservice.dto.ProviderServiceDto;
+import ee.janek24back.controller.providerservice.ProviderServiceInfo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -16,9 +18,20 @@ public interface ProviderServiceMapper {
     @Mapping(source = "name", target = "serviceName")
     @Mapping(source = "descriptionShort", target = "descriptionShort")
     @Mapping(source = "unitCost", target = "unitCost")
-    ServiceInfo toServiceInfo (ProviderService providerService);
+    ProviderServiceInfo toServiceInfo (ProviderService providerService);
 
-    List<ServiceInfo> toServiceInfos (List<ProviderService> providerServices);
+    List<ProviderServiceInfo> toServiceInfos (List<ProviderService> providerServices);
+
+    @Mapping(source = "currencyIsId", target = "currencyIs.id")
+    @Mapping(source = "serviceCategoryId", target = "serviceCategory.id")
+    ProviderService toProviderService(ProviderServiceDto providerServiceDto);
+
+    @Mapping(source = "currencyIs.id", target = "currencyIsId")
+    @Mapping(source = "serviceCategory.id", target = "serviceCategoryId")
+    ProviderServiceDto toProviderServiceDto(ProviderService providerService);
+
+
+
 
 
 }

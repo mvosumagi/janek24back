@@ -1,11 +1,10 @@
-package ee.janek24back.controller.teenus.dto;
+package ee.janek24back.controller.providerservice.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeenusDto implements Serializable {
+public class ProviderServiceDto implements Serializable {
 
     Integer serviceCategoryId;
     @NotNull

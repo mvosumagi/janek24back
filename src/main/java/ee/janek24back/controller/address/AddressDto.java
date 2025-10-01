@@ -1,4 +1,4 @@
-package ee.janek24back.controller.address.dto;
+package ee.janek24back.controller.address;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

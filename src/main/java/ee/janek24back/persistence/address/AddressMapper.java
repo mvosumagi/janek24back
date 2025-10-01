@@ -1,6 +1,6 @@
 package ee.janek24back.persistence.address;
 
-import ee.janek24back.controller.address.dto.AddressDto;
+import ee.janek24back.controller.address.AddressDto;
 import ee.janek24back.controller.user.dto.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

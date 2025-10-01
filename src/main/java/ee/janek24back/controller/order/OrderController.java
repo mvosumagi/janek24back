@@ -1,6 +1,6 @@
-package ee.janek24back.controller.order.dto;
+package ee.janek24back.controller.order;
 
-import ee.janek24back.controller.teenus.dto.TeenusDto;
+import ee.janek24back.controller.order.dto.OrderDto;
 import ee.janek24back.infrastructure.error.ApiError;
 import ee.janek24back.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,12 +1,10 @@
 package ee.janek24back.service;
 
 import ee.janek24back.controller.order.dto.OrderDto;
-import ee.janek24back.controller.teenus.dto.TeenusDto;
 import ee.janek24back.infrastructure.exception.PrimaryKeyNotFoundException;
 import ee.janek24back.persistence.order.Order;
 import ee.janek24back.persistence.order.OrderMapper;
 import ee.janek24back.persistence.order.OrderRepository;
-import ee.janek24back.persistence.teenus.Teenus;
 import ee.janek24back.persistence.user.User;
 import ee.janek24back.persistence.user.UserRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
-package ee.janek24back.persistence.providerservice;
+package ee.janek24back.persistence.providerservice.image;
 
-import ee.janek24back.persistence.teenus.Teenus;
+import ee.janek24back.persistence.providerservice.ProviderService;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +21,5 @@ public class ProviderServiceImage {
 
     @OneToOne
     @JoinColumn(name = "provider_service_id", nullable = false, unique = true)
-    private Teenus teenus;
+    private ProviderService providerService;
 }
