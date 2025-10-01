@@ -1,25 +1,45 @@
 package ee.janek24back.persistence.providerservice.image;
 
-import ee.janek24back.persistence.providerservice.ProviderService;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "provider_service_image")
 public class ProviderServiceImage {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
+
+    @Column(name = "provider_service_id", nullable = false)
+    private Integer providerServiceId;
 
     @Lob
     @Column(name = "image_data", nullable = false)
     private byte[] imageData;
 
-    @OneToOne
-    @JoinColumn(name = "provider_service_id", nullable = false, unique = true)
-    private ProviderService providerService;
+    public ProviderServiceImage() {}
+
+    public ProviderServiceImage(Integer providerServiceId, byte[] imageData) {
+        this.providerServiceId = providerServiceId;
+        this.imageData = imageData;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getProviderServiceId() {
+        return providerServiceId;
+    }
+
+    public void setProviderServiceId(Integer providerServiceId) {
+        this.providerServiceId = providerServiceId;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
 }
