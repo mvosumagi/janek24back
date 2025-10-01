@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "service_category_id": 1,
+    "name": "Apartment Deep Clean",
+    "description_short": "Deep cleaning for apartments up to 60 m²",
+    "description_long": "Thorough cleaning including kitchen, bathroom, floors, and windows (inside). Supplies included.",
+    "valid_from": "2025-09-26",
+    "valid_to": "2099-12-31",
+    "unit_cost": 65.00,
+    "currency_is": 1,
+    "status": "A"
+  }
+]

@@ -1,0 +1,5 @@
+[
+  { "serviceCategoryId": 1, "serviceCategoryName": "Childcare" },
+  { "serviceCategoryId": 2, "serviceCategoryName": "Lawn care" },
+  { "serviceCategoryId": 3, "serviceCategoryName": "Pet walking" }
+]
