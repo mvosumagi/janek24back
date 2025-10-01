@@ -7,6 +7,7 @@ import ee.janek24back.persistence.providerservice.ProviderServiceMapper;
 import ee.janek24back.persistence.providerservice.ProviderServiceRepository;
 import ee.janek24back.persistence.providerservice.image.ProviderServiceImageRepository;
 import ee.janek24back.persistence.user.User;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,4 +58,9 @@ public class ProviderServiceService {
         return providerServiceMapper.toServiceInfos(providerServices);
     }
 
+    public void updateProviderService(Integer userId, Integer providerServiceId, @Valid ProviderServiceDto providerServiceDto) {
+
+
+
+    }
 }

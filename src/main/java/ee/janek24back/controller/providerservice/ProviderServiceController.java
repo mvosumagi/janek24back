@@ -35,6 +35,21 @@ public class ProviderServiceController {
         providerServiceService.addProviderService(userId, providerServiceDto);
     }
 
+
+    @PutMapping("/service")
+    @Operation(
+            summary = "uuendab teenuse sisestatud andmete alusel",
+            description = "uuendab teenue sisestatud andmete alusel")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "teenus edukalt uuendatud"),
+            @ApiResponse(responseCode = "400", description = "Vigased andmed", content = @Content(schema = @Schema(implementation = ApiError.class)))})
+    public void updateProviderService(@RequestParam Integer userId, @RequestParam Integer providerServiceId, @RequestBody @Valid ProviderServiceDto providerServiceDto) {
+        providerServiceService.updateProviderService(userId, providerServiceId, providerServiceDto);
+    }
+
+
+
+
     @GetMapping("/services")
     @Operation(summary = "Tagastab kasutaja teenused")
     public List<ProviderServiceDto> getUserProviderServices(@RequestParam Integer userId) {
