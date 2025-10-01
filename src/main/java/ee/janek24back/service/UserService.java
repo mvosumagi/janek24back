@@ -22,7 +22,6 @@ import ee.janek24back.persistence.user.UserMapper;
 import ee.janek24back.persistence.user.UserRepository;
 import ee.janek24back.persistence.usercompany.UserCompany;
 import ee.janek24back.persistence.usercompany.UserCompanyRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +56,7 @@ public class UserService {
             throw new ForbiddenException("The username is already taken", 132132);
         }
 
-        User user = createUser(username, password,userDto);
+        User user = createUser(username, password, userDto);
         userRepository.save(user);
 
         Address address = createAddress(userDto, user);
@@ -139,15 +138,10 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("User not found", userId));
 
-        // eraldi meetod, getLatestAddress
         List<Address> addresses = addressRepository.findAddressesBy(user);
         Address address = addresses.get(0);
-
         Optional<UserCompany> optionalUserCompany = userCompanyRepository.findCompanyBy(user);
-
         UserDto userDto = userFullMapper.toUserDto(user);
-
-        // eraldi meetod, setAddress info
         userDto.setState(address.getCounty());
         userDto.setAddress(address.getDetails());
         userDto.setCountryId(address.getCountry().getId());
@@ -166,16 +160,47 @@ public class UserService {
             userDto.setRegNo("");
         }
 
-
         return userDto;
     }
 
+    @Transactional
     public void updateUser(Integer userId, UserDto userDto) {
-        // to implement
+        User user = getValidUser(userId);
+
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setPhoneNo(userDto.getPhoneNumber());
+
+        userRepository.save(user);
+
+        List<Address> addresses = addressRepository.findAddressesBy(user);
+        Address address;
+
+        if (addresses.isEmpty()) {
+            address = createAddress(userDto, user);
+        } else {
+            address = addresses.get(0);
+            Country country = getValidCountry(userDto.getCountryId());
+            City city = getValidCity(userDto.getCityId());
+            address.setCountry(country);
+            address.setCity(city);
+            address.setCounty(userDto.getState());
+            address.setDetails(userDto.getAddress());
+            address.setPostalCode(userDto.getPostalCode());
+        }
+
+        addressRepository.save(address);
+
+        if (Boolean.TRUE.equals(userDto.getIsCompany())) {
+            Company company = getOrCreateCompany(userDto);
+            linkUserToCompany(user, company);
+        }
     }
 
     public void updatePassword(PasswordUpdate passwordUpdate) {
-        // to implement
+
+
 
     }
 }
