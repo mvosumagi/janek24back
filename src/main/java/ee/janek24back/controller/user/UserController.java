@@ -32,7 +32,6 @@ public class UserController {
         userService.addUser(username, password, userDto);
     }
 
-
     @PutMapping("/user")
     public void updateUser(@RequestParam Integer userId, @RequestBody @Valid UserDto userDto) {
         userService.updateUser(userId, userDto);
