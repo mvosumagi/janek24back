@@ -198,9 +198,13 @@ public class UserService {
         }
     }
 
+    @Transactional
     public void updatePassword(PasswordUpdate passwordUpdate) {
-
-
-
+        User user = getValidUser(passwordUpdate.getUserId());
+        if (passwordUpdate.getNewPassword().equals(user.getPassword())) {
+            throw new ForbiddenException("Uus parool ei tohi olla sama mis vana parool", 132133);
+        }
+        user.setPassword(passwordUpdate.getNewPassword());
+        userRepository.save(user);
     }
 }

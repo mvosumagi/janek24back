@@ -1,5 +1,6 @@
 package ee.janek24back.controller.user.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PasswordUpdate {
+
+    @NotNull
     private Integer userId;
-    private String oldPassword;
+
+    @NotNull
     private String newPassword;
 }
