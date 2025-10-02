@@ -43,8 +43,8 @@ public class ProviderServiceController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "teenus edukalt uuendatud"),
             @ApiResponse(responseCode = "400", description = "Vigased andmed", content = @Content(schema = @Schema(implementation = ApiError.class)))})
-    public void updateProviderService(@RequestParam Integer userId, @RequestParam Integer providerServiceId, @RequestBody @Valid ProviderServiceDto providerServiceDto) {
-        providerServiceService.updateProviderService(userId, providerServiceId, providerServiceDto);
+    public void updateProviderService(@RequestParam Integer providerServiceId, @RequestBody @Valid ProviderServiceDto providerServiceDto) {
+        providerServiceService.updateProviderService(providerServiceId, providerServiceDto);
     }
 
 

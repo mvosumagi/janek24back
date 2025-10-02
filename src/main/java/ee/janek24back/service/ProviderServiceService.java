@@ -6,12 +6,13 @@ import ee.janek24back.persistence.providerservice.ProviderService;
 import ee.janek24back.persistence.providerservice.ProviderServiceMapper;
 import ee.janek24back.persistence.providerservice.ProviderServiceRepository;
 import ee.janek24back.persistence.providerservice.image.ProviderServiceImageRepository;
+import ee.janek24back.persistence.servicecategory.ServiceCategory;
 import ee.janek24back.persistence.user.User;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Currency;
 import java.util.List;
 
 @Service
@@ -21,6 +22,19 @@ public class ProviderServiceService {
     private final ProviderServiceMapper providerServiceMapper;
     private final ProviderServiceRepository providerServiceRepository;
     private final ProviderServiceImageRepository imageRepository;
+
+
+    public void updateProviderService(Integer providerServiceId, ProviderServiceDto providerServiceDto) {
+        ProviderService existingService = providerServiceRepository.findById(providerServiceId)
+                .orElseThrow(() -> new RuntimeException("Service not found with id: " + providerServiceId));
+
+        ProviderService updatedService = providerServiceMapper.toProviderService(providerServiceDto);
+        updatedService.setId(existingService.getId());
+        updatedService.setUser(existingService.getUser());
+
+        providerServiceRepository.save(updatedService);
+    }
+
 
     @Transactional
     public void addProviderService(Integer userId, ProviderServiceDto providerServiceDto) {
@@ -58,9 +72,4 @@ public class ProviderServiceService {
         return providerServiceMapper.toServiceInfos(providerServices);
     }
 
-    public void updateProviderService(Integer userId, Integer providerServiceId, @Valid ProviderServiceDto providerServiceDto) {
-
-
-
-    }
 }
