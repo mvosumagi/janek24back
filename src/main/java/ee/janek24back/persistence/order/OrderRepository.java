@@ -7,11 +7,8 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-
-    @Query("select o from Order o where o.user.id = :userId")
-    List<Order> findBy(Integer userId);
-
-
-
+    @Query("select o from Order o where o.user.id = :userId order by o.date desc")
+    List<Order> findByUserId(Integer userId);
 
 }
+

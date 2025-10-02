@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
@@ -15,14 +16,22 @@ import java.time.LocalDate;
 public class OrderDto implements Serializable {
 
     Integer providerServiceId;
+
     @NotNull
     LocalDate date;
+
     @NotNull
     @Size(max = 1000)
     String userComment;
+
     @NotNull
     @Size(max = 1)
     String status;
+
     @NotNull
     String confirmationComment;
+    String serviceName;
+    String providerName;
+    BigDecimal unitCost;
+
 }

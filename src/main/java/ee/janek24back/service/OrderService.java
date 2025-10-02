@@ -33,21 +33,22 @@ public class OrderService {
         order.setUser(user);
         return order;
     }
+
     private User getValidUser(Integer userId) {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new PrimaryKeyNotFoundException("userId", userId));
     }
 
     public List<OrderDto> getUserOrders(Integer userId) {
-        List<Order> orders = orderRepository.findBy(userId);
+        List<Order> orders = orderRepository.findByUserId(userId);
         return orders.stream()
                 .map(order -> {
                     OrderDto dto = orderMapper.toOrderDto(order);
+                    dto.setServiceName(order.getProviderService().getName());
+                    dto.setUnitCost(order.getProviderService().getUnitCost());
+                    dto.setProviderName(order.getProviderService().getUser().getFullName());
                     return dto;
                 })
                 .toList();
     }
-
-
-
 }
