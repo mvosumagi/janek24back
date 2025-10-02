@@ -69,4 +69,10 @@ public class ProviderService {
     @Column(name = "status", nullable = false, length = 1)
     private String status;
 
+    public String getServiceName() {
+        return name;
+    }
+    public String getProviderName() {
+        return user.getFullName();
+    }
 }

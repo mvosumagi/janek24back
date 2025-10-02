@@ -54,6 +54,7 @@ public class ProviderServiceService {
     public void addProviderService(Integer userId, ProviderServiceDto providerServiceDto) {
         ProviderService providerService = createProviderService(userId, providerServiceDto);
         providerServiceRepository.save(providerService);
+
     }
 
     private ProviderService createProviderService(Integer userId, ProviderServiceDto providerServiceDto) {
@@ -65,9 +66,12 @@ public class ProviderServiceService {
     }
 
     public List<ProviderServiceDto> getUserProviderServices(Integer userId) {
-        List<ProviderService> providerServices = providerServiceRepository.findByUserId(userId);
+        List<ProviderService> providerServices = providerServiceRepository.findBy(userId);
         return providerServices.stream()
-                .map(providerServiceMapper::toProviderServiceDto)
+                .map(providerService -> {
+                    ProviderServiceDto dto = providerServiceMapper.toProviderServiceDto(providerService);
+                    return dto;
+                })
                 .toList();
     }
 
@@ -78,8 +82,8 @@ public class ProviderServiceService {
     }
 
     public List<ProviderServiceInfo> searchServices(String partialDescription) {
-        List<ProviderService> providerServices = providerServiceRepository
-                .findProviderServicesBy(partialDescription, partialDescription);
+        List<ProviderService> providerServices = providerServiceRepository.findProviderServicesBy(partialDescription, partialDescription);
         return providerServiceMapper.toServiceInfos(providerServices);
     }
+
 }

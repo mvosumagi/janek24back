@@ -9,13 +9,13 @@ public interface ProviderServiceRepository extends JpaRepository<ProviderService
 
     @Query("""
             select p from ProviderService p
-            where upper(p.name) like upper(concat('%', :serviceName, '%')) 
-               or upper(p.descriptionShort) like upper(concat('%', :description, '%'))
-            """)
+            where upper(p.name) like upper(concat('%', :serviceName, '%')) or upper(p.descriptionShort) like upper(concat('%', :description, '%'))""")
     List<ProviderService> findProviderServicesBy(String serviceName, String description);
 
     @Query("select p from ProviderService p where p.user.id = :userId")
-    List<ProviderService> findByUserId(Integer userId);
+    List<ProviderService> findBy(Integer userId);
 
-    List<ProviderService> findByDescriptionShortContainingIgnoreCaseOrDescriptionLongContainingIgnoreCase(String descriptionShort, String descriptionLong);
+
+
+
 }

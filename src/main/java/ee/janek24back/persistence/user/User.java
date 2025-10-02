@@ -9,13 +9,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-
 @Table(name = "\"user\"", schema = "janek24")
 public class User {
     @Id
@@ -59,5 +57,16 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-
+    public String getFullName() {
+        if (firstName != null && lastName != null) {
+            return firstName + " " + lastName;
+        }
+        if (firstName != null) {
+            return firstName;
+        }
+        if (lastName != null) {
+            return lastName;
+        }
+        return username;
+    }
 }

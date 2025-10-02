@@ -3,7 +3,6 @@ package ee.janek24back.controller.providerservice;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ee.janek24back.controller.providerservice.ProviderServiceInfo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
