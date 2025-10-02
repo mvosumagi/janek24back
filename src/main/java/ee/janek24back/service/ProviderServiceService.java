@@ -22,12 +22,12 @@ public class ProviderServiceService {
     private final ProviderServiceRepository providerServiceRepository;
     private final ProviderServiceImageRepository imageRepository;
 
-    @Transactional(readOnly = true)
-    public byte[] getProviderServiceImage(Integer providerServiceId) {
-        return imageRepository.findByProviderServiceId(providerServiceId)
-                .map(ProviderServiceImage::getImageData)
-                .orElse(null);
-    }
+//    @Transactional(readOnly = true)
+//    public byte[] getProviderServiceImage(Integer providerServiceId) {
+//        return imageRepository.findByProviderServiceId(providerServiceId)
+//                .map(ProviderServiceImage::getImageData)
+//                .orElse(null);
+//    }
 
 
     @Transactional(readOnly = true)
