@@ -38,6 +38,14 @@ public class UserController {
     }
 
     @PutMapping("/password")
+    @Operation(
+            summary = "Uuendab kasutaja parooli",
+            description = "Uuendab kasutaja parooli ID alusel")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Parool edukalt uuendatud"),
+            @ApiResponse(responseCode = "400", description = "Vigased andmed", content = @Content(schema = @Schema(implementation = ApiError.class))),
+            @ApiResponse(responseCode = "403", description = "Uus parool on sama mis vana (errorCode = 132133)", content = @Content(schema = @Schema(implementation = ApiError.class))),
+            @ApiResponse(responseCode = "404", description = "Userit ei leitud", content = @Content(schema = @Schema(implementation = ApiError.class)))})
     public void updatePassword(@RequestBody @Valid PasswordUpdate passwordUpdate) {
         userService.updatePassword(passwordUpdate);
     }
