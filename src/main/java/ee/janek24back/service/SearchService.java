@@ -11,21 +11,25 @@ import ee.janek24back.persistence.servicecategory.ServiceCategoryImageRepository
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class SearchService {
 
     private final ProviderServiceRepository providerServiceRepository;
-    private final ProviderServiceMapper serviceMapper;
+    private final ProviderServiceMapper providerServiceMapper;
     private final ProviderServiceImageRepository providerServiceImageRepository;
     private final ServiceCategoryImageRepository serviceCategoryImageRepository;
 
     public List<ProviderServiceInfo> search(String query) {
-        List<ProviderService> providerServices = providerServiceRepository
-                .findByDescriptionShortContainingIgnoreCaseOrDescriptionLongContainingIgnoreCase(query, query);
-        List<ProviderServiceInfo> serviceInfos = serviceMapper.toServiceInfos(providerServices);
+        List<ProviderService> providerServices =
+                providerServiceRepository.findByDescriptionShortContainingIgnoreCaseOrDescriptionLongContainingIgnoreCase(query, query);
+
+        List<ProviderServiceInfo> serviceInfos = providerServiceMapper.toServiceInfos(providerServices);
 
         Map<Integer, String> categoryImageMap = new HashMap<>();
         for (ServiceCategoryImage image : serviceCategoryImageRepository.findAll()) {
@@ -45,12 +49,13 @@ public class SearchService {
                 service.setImageData(serviceImageMap.get(serviceId));
             } else if (categoryImageMap.containsKey(categoryId)) {
                 service.setImageData(categoryImageMap.get(categoryId));
+            } else {
+                service.setImageData(null); // or a default "no image" base64 string
             }
         }
 
         return serviceInfos;
     }
-
 
     private String encode(byte[] imageData) {
         return "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(imageData);
