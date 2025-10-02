@@ -14,8 +14,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/search")
-public class SearchController {
 
+
+public class SearchController {
     private final SearchService searchService;
 
     @GetMapping

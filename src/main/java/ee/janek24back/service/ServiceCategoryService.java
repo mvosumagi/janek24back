@@ -1,6 +1,7 @@
 package ee.janek24back.service;
 
 import ee.janek24back.controller.servicecategory.dto.ServiceCategoryDto;
+import ee.janek24back.persistence.servicecategory.ServiceCategory;
 import ee.janek24back.persistence.servicecategory.ServiceCategoryMapper;
 import ee.janek24back.persistence.servicecategory.ServiceCategoryRepository;
 import lombok.RequiredArgsConstructor;
