@@ -27,5 +27,7 @@ public interface ProviderServiceMapper {
 
     @Mapping(source = "currencyIs.id", target = "currencyIsId")
     @Mapping(source = "serviceCategory.id", target = "serviceCategoryId")
+    @Mapping(source = "id", target = "providerServiceId")
+
     ProviderServiceDto toProviderServiceDto(ProviderService providerService);
 }

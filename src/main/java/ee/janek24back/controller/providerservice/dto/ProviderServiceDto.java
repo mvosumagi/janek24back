@@ -35,4 +35,6 @@ public class ProviderServiceDto implements Serializable {
     @NotNull
     @Size(max = 1)
     String status;
+    Integer providerServiceId;
+
 }
