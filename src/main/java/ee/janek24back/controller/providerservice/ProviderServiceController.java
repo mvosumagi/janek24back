@@ -79,18 +79,3 @@ public class ProviderServiceController {
     }
 }
 
-
-//    @GetMapping("/service/{providerServiceId}/image")
-//    @Operation(summary = "Tagastab teenuse pildi")
-//    public ResponseEntity<byte[]> getServiceImage(@PathVariable Integer providerServiceId) {
-//        byte[] imageData = providerServiceService.getProviderServiceImage(providerServiceId);
-//
-//        if (imageData == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.IMAGE_JPEG)
-//                .body(imageData);
-//    }
-//}
