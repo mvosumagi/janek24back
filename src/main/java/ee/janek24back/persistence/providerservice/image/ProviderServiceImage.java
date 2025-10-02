@@ -8,14 +8,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "provider_service_image")
+@Table(name = "provider_service_image", schema = "janek24")
 public class ProviderServiceImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Lob
     @Column(name = "image_data", nullable = false)
     private byte[] imageData;
 

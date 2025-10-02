@@ -5,14 +5,13 @@ import ee.janek24back.controller.providerservice.dto.ProviderServiceDto;
 import ee.janek24back.persistence.providerservice.ProviderService;
 import ee.janek24back.persistence.providerservice.ProviderServiceMapper;
 import ee.janek24back.persistence.providerservice.ProviderServiceRepository;
+import ee.janek24back.persistence.providerservice.image.ProviderServiceImage;
 import ee.janek24back.persistence.providerservice.image.ProviderServiceImageRepository;
-import ee.janek24back.persistence.servicecategory.ServiceCategory;
 import ee.janek24back.persistence.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Currency;
 import java.util.List;
 
 @Service
@@ -22,6 +21,21 @@ public class ProviderServiceService {
     private final ProviderServiceMapper providerServiceMapper;
     private final ProviderServiceRepository providerServiceRepository;
     private final ProviderServiceImageRepository imageRepository;
+
+    @Transactional(readOnly = true)
+    public byte[] getProviderServiceImage(Integer providerServiceId) {
+        return imageRepository.findByProviderServiceId(providerServiceId)
+                .map(ProviderServiceImage::getImageData)
+                .orElse(null);
+    }
+
+
+    @Transactional(readOnly = true)
+    public ProviderServiceDto getProviderServiceById(Integer providerServiceId) {
+        ProviderService providerService = providerServiceRepository.findById(providerServiceId)
+                .orElseThrow(() -> new RuntimeException("Service not found with id: " + providerServiceId));
+        return providerServiceMapper.toProviderServiceDto(providerService);
+    }
 
 
     public void updateProviderService(Integer providerServiceId, ProviderServiceDto providerServiceDto) {
